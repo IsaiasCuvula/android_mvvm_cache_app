@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import coil.ImageLoader
 import coil.decode.SvgDecoder
 import coil.load
+import com.bersyte.cacheapp.R
 import com.bersyte.cacheapp.databinding.LayoutAdapterBinding
 import com.bersyte.cacheapp.models.CountriesItem
 
@@ -48,23 +49,40 @@ class CacheAppAdapter : Adapter<CacheAppAdapter.CacheAppViewHolder>() {
     override fun onBindViewHolder(holder: CacheAppViewHolder, position: Int) {
         val country = countries[position]
 
-        holder.itemView.apply {
-            val imageLoader = ImageLoader.Builder(context)
-                .componentRegistry {
-                    add(SvgDecoder(context))
+        holder.apply {
+            itemView.apply {
+
+                val imageLoader = ImageLoader.Builder(context)
+                    .componentRegistry {
+                        add(SvgDecoder(context))
+                    }.build()
+                holder.binding.ivFlag.load(country.flag, imageLoader) {
+                    crossfade(true)
+                    crossfade(1000)
                 }
-                .build()
 
-            holder.binding.ivFlag.load(country.flag, imageLoader)
 
-        }
+                binding.apply {
+                    country.apply {
+                        context.resources.apply {
+                            tvName.text =
+                                getString(R.string.country,
+                                name)
 
-        holder.binding.apply {
-            country.apply {
-                tvName.text = name
-                tvCapital.text = capital
-                tvPopulation.text = population.toString()
-                tvNumericCode.text = callingCodes.toString()
+                            tvCapital.text =
+                                getString(R.string.capital,
+                                capital)
+
+                            tvPopulation.text =
+                                getString(R.string.population,
+                                population.toString())
+
+                            tvNumericCode.text =
+                                getString(R.string.code,
+                                callingCodes)
+                        }
+                    }
+                }
             }
         }
     }
