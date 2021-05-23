@@ -6,9 +6,12 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import coil.ImageLoader
+import coil.decode.SvgDecoder
 import coil.load
 import com.bersyte.cacheapp.databinding.LayoutAdapterBinding
 import com.bersyte.cacheapp.models.CountriesItem
+
 
 class CacheAppAdapter : Adapter<CacheAppAdapter.CacheAppViewHolder>() {
 
@@ -45,12 +48,24 @@ class CacheAppAdapter : Adapter<CacheAppAdapter.CacheAppViewHolder>() {
     override fun onBindViewHolder(holder: CacheAppViewHolder, position: Int) {
         val country = countries[position]
 
+        holder.itemView.apply {
+            val imageLoader = ImageLoader.Builder(context)
+                .componentRegistry {
+                    add(SvgDecoder(context))
+                }
+                .build()
+
+            holder.binding.ivFlag.load(country.flag, imageLoader)
+
+        }
+
         holder.binding.apply {
-            ivFlag.load(country.flag)
-            tvName.text = country.name
-            tvCapital.text = country.capital
-            tvPopulation.text = country.population.toString()
-            tvNumericCode.text = country.callingCodes.toString()
+            country.apply {
+                tvName.text = name
+                tvCapital.text = capital
+                tvPopulation.text = population.toString()
+                tvNumericCode.text = callingCodes.toString()
+            }
         }
     }
 
