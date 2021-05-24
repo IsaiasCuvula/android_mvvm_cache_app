@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bersyte.cacheapp.adapter.CacheAppAdapter
 import com.bersyte.cacheapp.databinding.ActivityMainBinding
+import com.bersyte.cacheapp.utils.Resource
 import com.bersyte.cacheapp.viewmodel.CacheAppViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,7 +38,15 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.countriesResponse.observe(this, { countries ->
             cacheAppAdapter.countries = countries
-            Log.d("aaa", "populateUI: $countries")
+
+            /*binding.apply {
+
+                progressBar.isVisible = countries is Resource.Loading && countries.isNullOrEmpty()
+                tvErrorMessage.isVisible = countries is Resource.Failure && countries.isNullOrEmpty()
+                tvErrorMessage.text = countries
+            }*/
+
+
         })
     }
 
