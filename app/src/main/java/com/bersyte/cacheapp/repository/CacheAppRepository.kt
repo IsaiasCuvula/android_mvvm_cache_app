@@ -3,6 +3,7 @@ package com.bersyte.cacheapp.repository
 import com.bersyte.cacheapp.api.ApiService
 import com.bersyte.cacheapp.db.CountryDao
 import com.bersyte.cacheapp.models.Countries
+import com.bersyte.cacheapp.models.CountriesItem
 import com.bersyte.cacheapp.utils.Resource
 import com.bersyte.cacheapp.utils.networkBoundResource
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +17,7 @@ class CacheAppRepository
     private val dao: CountryDao
 ) {
 
-     fun getCountries(): Flow<Resource<Countries>> {
+     fun getCountries(): Flow<Resource<List<CountriesItem>>> {
         return networkBoundResource(
             fetchFromLocal = { dao.getAllCountries() },
             shouldFetchFromRemote = { it == null },

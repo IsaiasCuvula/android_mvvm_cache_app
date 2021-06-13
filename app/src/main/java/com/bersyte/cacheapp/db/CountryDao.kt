@@ -18,6 +18,6 @@ interface CountryDao {
     suspend fun deleteAllCountries()
 
     @Query("SELECT * FROM countries")
-    fun getAllCountries(): Flow<Countries>
+    fun getAllCountries(): Flow<List<CountriesItem>>
 
 }

@@ -7,13 +7,13 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "countries")
 data class CountriesItem(
     @Ignore var callingCodes: List<String>,
-    @Ignore var capital: String,
-    @Ignore var flag: String,
-    @Ignore var name: String,
+    var capital: String,
+    var flag: String,
+    var name: String,
     @PrimaryKey var population: Int,
-) {
+){
     constructor() : this(
-        arrayListOf(), "", "", "",
+        arrayListOf(),"", "", "",
         0
     )
 
