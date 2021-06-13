@@ -3,6 +3,7 @@ package com.bersyte.cacheapp.di
 import android.app.Application
 import androidx.room.Room
 import com.bersyte.cacheapp.api.ApiService
+import com.bersyte.cacheapp.db.CountryDao
 import com.bersyte.cacheapp.db.CountryDatabase
 import com.bersyte.cacheapp.utils.Constants.BASE_URL
 import dagger.Module
@@ -34,9 +35,14 @@ object CacheAppModule {
         Room.databaseBuilder(
             app,
             CountryDatabase::class.java,
-            "countries_db"
+            "countries_db31"
         )
             .build()
 
 
+    @Singleton
+    @Provides
+    fun provideRepoDao(db: CountryDatabase): CountryDao {
+        return db.countriesDao()
+    }
 }

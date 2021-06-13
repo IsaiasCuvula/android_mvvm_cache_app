@@ -1,13 +1,20 @@
 package com.bersyte.cacheapp.models
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "countries")
 data class CountriesItem(
-    val callingCodes: List<String>,
-    val capital: String,
-    val flag: String,
-    @PrimaryKey val name: String,
-    val population: Int
-)
+    @Ignore var callingCodes: List<String>,
+    @Ignore var capital: String,
+    @Ignore var flag: String,
+    @Ignore var name: String,
+    @PrimaryKey var population: Int,
+) {
+    constructor() : this(
+        arrayListOf(), "", "", "",
+        0
+    )
+
+}

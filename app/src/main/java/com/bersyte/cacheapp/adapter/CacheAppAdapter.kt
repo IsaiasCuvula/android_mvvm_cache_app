@@ -66,20 +66,26 @@ class CacheAppAdapter : Adapter<CacheAppAdapter.CacheAppViewHolder>() {
                     country.apply {
                         context.resources.apply {
                             tvName.text =
-                                getString(R.string.country,
-                                name)
+                                getString(
+                                    R.string.country,
+                                    name
+                                )
 
                             tvCapital.text =
-                                getString(R.string.capital,
-                                capital)
+                                getString(
+                                    R.string.capital,
+                                    capital
+                                )
 
                             tvPopulation.text =
-                                getString(R.string.population,
-                                population.toString())
+                                getString(
+                                    R.string.population,
+                                    population.toString()
+                                )
 
-                            tvNumericCode.text =
-                                getString(R.string.code,
-                                callingCodes)
+                            tvNumericCode.text = ""
+                            // getString(R.string.code,
+                            //callingCodes)
                         }
                     }
                 }
